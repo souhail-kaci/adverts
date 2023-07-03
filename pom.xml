@@ -29,6 +29,30 @@
             <version>5.3.18</version>
         </dependency>
 
+        <!--    security-->
+
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.4.9</version>
+        </dependency>
+
+        <!-- Dépendance pour l'intégration avec Spring Web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.4.9</version>
+        </dependency>
+
+        <!-- Dépendance pour la gestion des sessions -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.4.9</version>
+        </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
         <dependency>
@@ -45,14 +69,14 @@
             <version>5.4.33.Final</version>
         </dependency>
 
-<!--        mysql-connector-->
+        <!--        mysql-connector-->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
-<!-- spring data jpa-->
+        <!-- spring data jpa-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
@@ -66,6 +90,13 @@
             <version>1.2</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 
 
     </dependencies>
