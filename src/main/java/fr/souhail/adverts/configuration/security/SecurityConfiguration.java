@@ -16,6 +16,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests(p -> {
                     p.antMatchers("/resources/**").permitAll();
+                    p.antMatchers("/sign-up").permitAll();
                     p.anyRequest().authenticated();
                 })
                 .formLogin()
