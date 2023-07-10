@@ -1,19 +1,14 @@
 package fr.souhail.adverts.controllers;
 
-
-import fr.souhail.adverts.mappers.UserMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
+public class AdvertController {
 
-
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @GetMapping("/adverts")
+    public String adverts() {
+        return "adverts";
     }
-
 
 }

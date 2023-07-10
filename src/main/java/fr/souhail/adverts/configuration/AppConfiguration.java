@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "fr.souhail.adverts")
+@ComponentScan("fr.souhail.adverts")
 public class AppConfiguration implements WebMvcConfigurer {
 
 

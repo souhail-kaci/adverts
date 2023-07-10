@@ -9,20 +9,32 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+
+    private final CustomAuthentificationProvider customAuthentificationProvider;
+
+    public SecurityConfiguration(CustomAuthentificationProvider customAuthentificationProvider) {
+        this.customAuthentificationProvider = customAuthentificationProvider;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .disable()
+                .authenticationProvider(customAuthentificationProvider)
                 .authorizeRequests(p -> {
                     p.antMatchers("/resources/**").permitAll();
                     p.antMatchers("/sign-up").permitAll();
                     p.anyRequest().authenticated();
                 })
                 .formLogin()
+                .loginProcessingUrl("/handle-login")
+                .usernameParameter("email")
                 .loginPage("/login")
+                .defaultSuccessUrl("/adverts")
                 .permitAll();
 
 
     }
+
 }
