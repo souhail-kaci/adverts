@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Sign-up</title>
 
     <link type="text/css" rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -27,12 +27,13 @@
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
                             <img src="https://www.immodf.fr/wp-content/uploads/2020/10/agence-immobiliere-vedre-plus-vite-1170x0-c-center.jpg"
-                                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100% ;object-fit: fill;"/>
+                                 alt="login form" class="img-fluid"
+                                 style="border-radius: 1rem 0 0 1rem; height: 100% ;object-fit: fill;"/>
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form:form modelAttribute="user" >
+                                <form:form modelAttribute="user" method="post" action="sign-up">
 
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
@@ -42,29 +43,59 @@
 
 
                                     <div class="form-outline mb-4">
-                                        <form:input path="firstName" id="firstName" cssClass="form-control form-control-lg" />
                                         <label class="form-label" for="firstName">Prénom</label>
+                                        <form:input path="firstName"
+                                                    id="firstName"
+                                                    cssClass="form-control form-control-lg"
+                                                    cssErrorClass="form-control form-control-lg is-invalid"
+                                        />
+                                        <div id="validationServer03Feedback" class="text-danger">
+                                            <form:errors path="firstName"/>
+                                        </div>
+
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <form:input path="lastName" id="lastName" cssClass="form-control form-control-lg" />
                                         <label class="form-label" for="lastName">Nom</label>
+                                        <form:input path="lastName"
+                                                    id="lastName"
+                                                    cssClass="form-control form-control-lg"
+                                                    cssErrorClass="form-control form-control-lg is-invalid"
+                                        />
+                                        <div id="validationServer03Feedback" class="text-danger">
+                                            <form:errors path="lastName"/>
+                                        </div>
                                     </div>
 
 
                                     <div class="form-outline mb-4">
-                                        <form:input path="email" id="email" cssClass="form-control form-control-lg" />
                                         <label class="form-label" for="email">Email</label>
+                                        <form:input path="email"
+                                                    id="email"
+                                                    cssClass="form-control form-control-lg"
+                                                    cssErrorClass="form-control form-control-lg is-invalid"
+                                        />
+                                        <div id="validationServer03Feedback" class="text-danger">
+                                            <form:errors path="email"/>
+                                        </div>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <form:input path="password" id="password" cssClass="form-control form-control-lg" />
                                         <label class="form-label" for="email">Password</label>
+                                        <form:input path="password"
+                                                    id="password"
+                                                    cssClass="form-control form-control-lg"
+                                                    cssErrorClass=" form-control form-control-lg is-invalid"
+                                        />
+                                        <div id="validationServer03Feedback" class="text-danger">
+                                            <form:errors path="password"/>
+                                        </div>
                                     </div>
+
 
 
                                     <div class="pt-1 mb-4">
-                                        <button class="btn btn-dark btn-lg btn-block" type="button">Goo</button>
+                                        <input class="btn btn-dark btn-lg btn-block" type="submit" value="Gooo"/>
                                     </div>
 
                                 </form:form>
