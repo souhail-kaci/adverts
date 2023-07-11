@@ -1,9 +1,13 @@
 package fr.souhail.adverts.configuration.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -21,20 +25,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                 .disable()
-                .authenticationProvider(customAuthentificationProvider)
-                .authorizeRequests(p -> {
-                    p.antMatchers("/resources/**").permitAll();
-                    p.antMatchers("/sign-up").permitAll();
-                    p.anyRequest().authenticated();
+                .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests(matcher -> {
+                    matcher.antMatchers("/resources/**").permitAll();
+                    matcher.antMatchers("/sign-up").anonymous();
+                    matcher.antMatchers("/login").anonymous();
+                    matcher.anyRequest().authenticated();
                 })
                 .formLogin()
                 .loginProcessingUrl("/handle-login")
+                .failureUrl("/login?error=true")
+                .defaultSuccessUrl("/adverts")
                 .usernameParameter("email")
                 .loginPage("/login")
-                .defaultSuccessUrl("/adverts")
                 .permitAll();
-
-
     }
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) {
+        auth.authenticationProvider(customAuthentificationProvider);
+    }
+
+    @Bean
+    public AuthenticationManager getAuthenticationManager() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 
 }
