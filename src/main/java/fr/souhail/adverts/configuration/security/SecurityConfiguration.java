@@ -33,12 +33,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     matcher.anyRequest().authenticated();
                 })
                 .formLogin()
-                .loginProcessingUrl("/handle-login")
-                .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/adverts")
-                .usernameParameter("email")
-                .loginPage("/login")
+                    .loginProcessingUrl("/handle-login")
+                    .failureUrl("/login?error=true")
+                    .defaultSuccessUrl("/adverts")
+                    .usernameParameter("email")
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
+                .logout()
+                .logoutUrl("/logout")
                 .permitAll();
+
+        ;
     }
 
 
