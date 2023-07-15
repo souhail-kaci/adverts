@@ -33,18 +33,33 @@
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form method="post" action="${pageContext.request.contextPath}/forgot-password">
+                                <form method="post" action="forgot-password">
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                         <span class="h1 fw-bold mb-0">Forget your password ? Don't worry </span>
                                     </div>
 
+                                    <c:if test="${not empty error}">
+                                        <h5 class="fw-normal mb-3 pb-3 text-danger" style="letter-spacing: 1px;">
+                                            <c:out value="${error}"/>
+                                        </h5>
+
+                                    </c:if>
+
+                                    <c:if test="${not empty succes}">
+                                        <h5 class="fw-normal mb-3 pb-3 text-success" style="letter-spacing: 1px;">
+                                            <c:out value="${succes}"/>
+                                        </h5>
+
+                                    </c:if>
+
+
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Enter your email</h5>
 
                                     <div class="form-outline mb-4">
                                         <input type="email" name="email" id="form2Example17"
-                                               class="form-control form-control-lg"/>
+                                               class="form-control form-control-lg" required/>
                                         <label class="form-label" for="form2Example17">Email address</label>
                                     </div>
 

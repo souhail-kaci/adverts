@@ -11,5 +11,7 @@ public interface IUserService {
 
     Integer saveUser(UserDto userDto);
 
+    void handleForgotPasswordRequest(String mail, String contextPath);
+
 
 }
