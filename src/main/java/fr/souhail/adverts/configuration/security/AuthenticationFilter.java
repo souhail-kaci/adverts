@@ -35,7 +35,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
 
         //OTHERWISE CONTINUE THE FILTER CHAIN
-
         filterChain.doFilter(request, response);
 
 
