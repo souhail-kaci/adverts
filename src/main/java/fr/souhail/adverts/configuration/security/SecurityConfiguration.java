@@ -37,16 +37,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     matcher.anyRequest().authenticated();
                 })
                 .formLogin()
-                    .loginProcessingUrl("/handle-login")
-                    .failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/adverts")
-                    .usernameParameter("email")
-                    .loginPage("/login")
-                    .permitAll()
-                    .and()
+                .loginProcessingUrl("/handle-login")
+                .failureUrl("/login?error=true")
+                .defaultSuccessUrl("/adverts")
+                .usernameParameter("email")
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(new CustomAccessDeniedHandler())
+                .and()
                 .logout()
                 .logoutUrl("/logout")
-                .permitAll();
+                .logoutSuccessUrl("/login?logout=true")
+                .permitAll()
+
+        ;
     }
 
 
