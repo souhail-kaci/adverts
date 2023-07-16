@@ -4,6 +4,7 @@ import fr.souhail.adverts.dto.UserDto;
 import fr.souhail.adverts.entities.PasswordResetToken;
 import fr.souhail.adverts.entities.Role;
 import fr.souhail.adverts.entities.User;
+import fr.souhail.adverts.exceptions.TokenNotValidException;
 import fr.souhail.adverts.exceptions.UserNotFoundException;
 import fr.souhail.adverts.mappers.UserMapper;
 import fr.souhail.adverts.repositories.PasswordResetTokenRepository;
@@ -17,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.Message;
-import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -83,6 +82,17 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void updateUserPassword(String newPassword, String token) {
+
+        User user = this.checkResetPasswordTokenValidity(token);
+
+        //SET PASSWORD
+        user.setPassword(this.passwordEncoder.encode(newPassword));
+
+
+    }
+
+    @Override
     public void handleForgotPasswordRequest(String email, String contextPath) {
 
         //FIND USER BY EMAIL
@@ -106,6 +116,21 @@ public class UserService implements IUserService {
         //SEND MAL TO USER
         this.javaMailSender.send(message);
 
+
+    }
+
+    @Override
+    public User checkResetPasswordTokenValidity(String token) {
+
+        var passwordResetToken = this.passwordResetTokenRepository.getPasswordResetTokenByToken(token)
+                .orElseThrow(() -> new TokenNotValidException("Token not found"));
+
+
+        if (passwordResetToken.getExpireDateTime().isBefore(LocalDateTime.now())) {
+            throw new TokenNotValidException("Token has expired");
+        }
+
+        return passwordResetToken.getUser();
 
     }
 
@@ -133,7 +158,7 @@ public class UserService implements IUserService {
         message.setTo(mail);
         message.setSubject("Forget Password");
         message.setText("Please connect to this url to reset your password : " +
-                contextPath + "/reset?token=" + token);
+                contextPath + "/reset-password?token=" + token);
 
         return message;
     }

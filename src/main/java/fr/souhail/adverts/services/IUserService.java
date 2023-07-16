@@ -11,7 +11,12 @@ public interface IUserService {
 
     Integer saveUser(UserDto userDto);
 
+
+    void updateUserPassword(String newPassword, String token);
+
     void handleForgotPasswordRequest(String mail, String contextPath);
+
+    User checkResetPasswordTokenValidity(String token);
 
 
 }

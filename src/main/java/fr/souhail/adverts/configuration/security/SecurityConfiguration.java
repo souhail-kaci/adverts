@@ -30,7 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests(matcher -> {
                     matcher.antMatchers("/resources/**").permitAll();
-                    matcher.antMatchers("/forgot-password").permitAll();
+                    matcher.antMatchers("/forgot-password").anonymous();
+                    matcher.antMatchers("/reset-password").anonymous();
                     matcher.antMatchers("/sign-up").anonymous();
                     matcher.antMatchers("/login").anonymous();
                     matcher.anyRequest().authenticated();
@@ -46,8 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .permitAll();
-
-        ;
     }
 
 

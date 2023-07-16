@@ -50,6 +50,13 @@
 
                                     </c:if>
 
+                                    <c:if test="${not empty succes}">
+                                        <h5 class="fw-normal mb-3 pb-3 text-success" style="letter-spacing: 1px;">
+                                            <c:out value="${succes}"/>
+                                        </h5>
+
+                                    </c:if>
+
                                     <div class="form-outline mb-4">
                                         <input type="email" name="email" id="form2Example17"
                                                class="form-control form-control-lg"/>
